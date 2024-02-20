@@ -93,7 +93,7 @@ function startTimer(duration, display) {
     }, 1000);
 }
 
-startGane.addEventListener('click',start);
+startGame.addEventListener('click',start);
 startGame.addEventListener('click', function(){
     var threeMin = 60 * 3,
     display = document.querySelector('#time');
@@ -102,7 +102,9 @@ startGame.addEventListener('click', function(){
 
 function start(){
     startGame.classList.add('hide');
-    Shuffle = questions.ariaSort(() => Math.random() + 1 );
+    Shuffle = questions.map(function(num){
+        return [questions(Math.random) * 6]
+    });
     questions.classList.remove('hide');
     CurrentIndex = 0;
     next();
