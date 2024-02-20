@@ -1,4 +1,4 @@
-var start = document.getElementById('start');
+var startGame = document.getElementById('start');
 var next = document.getElementById('next');
 var questions = document.getElementById('questions');
 var container = document.getElementById('question');
@@ -6,7 +6,7 @@ var answer = document.getElementById('answer');
 
 var score = 0;
 
-
+var CurrentIndex, Shuffle;
 
 var questions = [
     {
@@ -71,7 +71,7 @@ var questions = [
 
 ]
 
-start.addEventListener('click', starter);
+startGame.addEventListener('click', start);
 
 function startTimer(duration, display) {
     var timer = duration, minutes, seconds;
@@ -93,11 +93,59 @@ function startTimer(duration, display) {
     }, 1000);
 }
 
-function starter() { 
-    start.classList.add('hide');
-    shuffle = questions.sort(() = Math.random() + 1 );
+startGane.addEventListener('click',start);
+startGame.addEventListener('click', function(){
+    var threeMin = 60 * 3,
+    display = document.querySelector('#time');
+    startTimer(threeMin, display);
+});
+
+function start(){
+    startGame.classList.add('hide');
+    Shuffle = questions.ariaSort(() => Math.random() + 1 );
     questions.classList.remove('hide');
-    currentQuestionsIndex = 0;
+    CurrentIndex = 0;
     next();
     next.classList.remove('hide');
 }
+
+function Appear(question){
+    question.innerText = question.question
+    console.log(question)
+    question.answers.foreach(answer => {
+        var button = document.createElement('button')
+        button.innerText = answer.text
+        button.classList.add('btn')
+
+        if (answer.correct){
+            button.dataset.correct = answer.correct
+        }
+        button.addEventListener('click', selectAnswer)
+        answerButtonelement.appendChild(button)
+    })
+        
+    }
+
+function reset(){
+    clearStatusClass(document.body)
+    next.classList('hide')
+    while (answerButtonelement.firstChild){
+        answerButtonelement.removeChild(answerButtonelement.firstChild)
+    }
+}
+
+    function questionredo(question){
+
+        for(var i = 0; i < questions.clientHeight; i++);
+        questions.innerText('#question');
+        if (answer.correct){
+            button.dataset.correct = answer.correct
+            score ++ ;
+        }
+        score.innerText('Good Job!')
+    }
+
+
+    function next(){
+        showQuestion(suffle[currentQuestionIndex]);
+    }
