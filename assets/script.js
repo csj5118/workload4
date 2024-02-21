@@ -102,16 +102,17 @@ startGame.addEventListener('click', function(){
 });
 
 function start() {
-    var startButton = document.getElementById('start'); 
+    var startButton = document.getElementById('start');
     if (startButton) {
         startButton.classList.add('hide');
     }
 
-    var shuffledQuestions = shuffleArray(questions);
+    var shuffledQuestions = shuffleArray(quizQuestions);
     if (shuffledQuestions.length > 0) {
         var firstQuestion = shuffledQuestions[0];
         if (firstQuestion) {
             firstQuestion.classList.remove('hide');
+            Appear(firstQuestion);
         }
     }
     CurrentIndex = 0;
@@ -131,9 +132,9 @@ function start() {
 }
 
 function Appear(question) {
-    question.innerText = question.question;
+    questionsElement.innerText = question.question; 
     console.log(question);
-    question.answer.forEach(answer => { 
+    question.answer.forEach(answer => {
         var button = document.createElement('button');
         button.innerText = answer.text;
         button.classList.add('btn');
