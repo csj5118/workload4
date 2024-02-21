@@ -111,7 +111,6 @@ function start() {
     if (shuffledQuestions.length > 0) {
         var firstQuestion = shuffledQuestions[0];
         if (firstQuestion) {
-            firstQuestion.classList.remove('hide');
             Appear(firstQuestion);
         }
     }
@@ -132,7 +131,8 @@ function start() {
 }
 
 function Appear(question) {
-    questionsElement.innerText = question.question; 
+    questionsElement.innerText = question.question;
+    questionsElement.classList.remove('hide');  
     console.log(question);
     question.answer.forEach(answer => {
         var button = document.createElement('button');
@@ -146,7 +146,6 @@ function Appear(question) {
         answerButtonElement.appendChild(button);
     });
 }
-
 
 function reset(){
     clearStatusClass(document.body)
