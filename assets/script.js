@@ -1,14 +1,15 @@
 var startGame = document.getElementById('start');
-var next = document.getElementById('next');
-var questions = document.getElementById('questions');
-var container = document.getElementById('question');
-var answer = document.getElementById('answer');
+var nextButton = document.getElementById('next');
+var questionsElement = document.getElementById('questions');
+var container = document.getElementsByClassName('question');
+var answerButtonElement = document.getElementById('answer');
+
 
 var score = 0;
 
 var CurrentIndex, Shuffle;
 
-var questions = [
+var quizQuestions = [
     {
         question: 'Which of the following is my favorite flavor of coffe?',
         answer : [
@@ -100,33 +101,51 @@ startGame.addEventListener('click', function(){
     startTimer(threeMin, display);
 });
 
-function start(){
-    startGame.classList.add('hide');
-    Shuffle = questions.map(function(num){
-        return [questions(Math.random) * 6]
-    });
-    questions.classList.remove('hide');
+function start() {
+    var startButton = document.getElementById('start'); 
+    if (startButton) {
+        startButton.classList.add('hide');
+    }
+
+    var shuffledQuestions = shuffleArray(questions);
+    if (shuffledQuestions.length > 0) {
+        var firstQuestion = shuffledQuestions[0];
+        if (firstQuestion) {
+            firstQuestion.classList.remove('hide');
+        }
+    }
     CurrentIndex = 0;
-    next();
-    next.classList.remove('hide');
+
+    var next = document.getElementById('next');
+    if (next) {
+        next.classList.remove('hide');
+    }
+
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
 }
 
-function Appear(question){
-    question.innerText = question.question
-    console.log(question)
-    question.answers.foreach(answer => {
-        var button = document.createElement('button')
-        button.innerText = answer.text
-        button.classList.add('btn')
+function Appear(question) {
+    question.innerText = question.question;
+    console.log(question);
+    question.answer.forEach(answer => { 
+        var button = document.createElement('button');
+        button.innerText = answer.text;
+        button.classList.add('btn');
 
-        if (answer.correct){
-            button.dataset.correct = answer.correct
+        if (answer.correct) {
+            button.dataset.correct = answer.correct;
         }
-        button.addEventListener('click', selectAnswer)
-        answerButtonelement.appendChild(button)
-    })
-        
-    }
+        button.addEventListener('click', selectAnswer);
+        answerButtonElement.appendChild(button);
+    });
+}
+
 
 function reset(){
     clearStatusClass(document.body)
