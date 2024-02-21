@@ -147,6 +147,19 @@ function Appear(question) {
     });
 }
 
+function selectAnswer(event){
+    var selectButton = event.target;
+    var correct = selectButton.dataset.correct === 'true';
+
+    if (correct){
+        console.log('Bingo');
+    } else {
+        console.log('So...Very...Wrong');
+    }
+}
+
+
+
 function reset(){
     clearStatusClass(document.body)
     next.classList('hide')
